@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, and credit the data providers listed in README.md."
+title: "The Black Hole at the Centre of the Galaxy (Il buco nero al centro della Galassia): weigh Sgr A* yourself: mass and distance of the Milky Way's black hole from the orbits of the S stars"
+authors:
+  - family-names: Battistel
+    given-names: Edoardo
+version: "1.8"
+date-released: 2026-11-21
+license: BSD-3-Clause
+repository-code: "https://github.com/EDOKILLER/black-hole-at-the-galactic-center"
+keywords:
+  - Sgr A*
+  - Galactic Centre
+  - S stars
+  - black hole
+  - orbit fitting
+  - MCMC

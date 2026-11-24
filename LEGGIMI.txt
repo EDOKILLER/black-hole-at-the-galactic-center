@@ -1,0 +1,102 @@
+Il buco nero al centro della Galassia - versione 1.8 (21/11/2026)
+=================================================================
+
+Pesa Sagittarius A*, il buco nero al centro della Via Lattea, con l'orbita della
+stella S2 (16 anni): adatta un'orbita kepleriana alle 145 posizioni e 44 velocità
+radiali pubblicate da Gillessen et al. 2017 (VizieR J/ApJ/837/30, dal 1992 al 2016)
+e ne ricava la massa del buco nero e la sua distanza dal Sole, con le incertezze.
+
+Novità della 1.8:
+  - nuova spunta «Aggiungi le velocità Keck fino al 2018, pericentro compreso (Do 2019,
+    solo S2)»: 72 velocità di Keck, Gemini e Subaru dal 2000 al 2018,7 (le 115 di Do et al.
+    2019, Science 365, 664, pubblicate su VizieR nella tabella 4 di Chu et al. 2023,
+    J/ApJ/948/94; quelle VLT, già presenti in Gillessen 2017, non si contano due volte).
+    Nel 2018 S2 passa da +4017 a −1830 km/s attorno al pericentro di maggio;
+  - nuovo pulsante «Misura il redshift relativistico»: rifà il calcolo 12 volte con il
+    fattore del redshift fisso (da −0,5 a 2,5; 1 = Einstein, 0 = Newton) e dalla parabola del
+    χ² ricava il valore e l'errore. Con S2: fattore 0,49 ± 0,28, Newton escluso a 1,8 σ.
+    Gli articoli (GRAVITY 2019: 1,04 ± 0,05; Do 2019: 0,88 ± 0,17) usano anche le posizioni del
+    2017-2018, che non sono pubbliche: qui le posizioni finiscono nel 2016,5 e l'orbita può
+    in parte compensare il redshift cambiando massa e distanza.
+
+Novità della 1.7 (correzione della 1.6):
+  - scheda «Centro»: il titolo del pannello infrarosso va su due righe (era tagliato);
+  - nella finestra l'indice di convergenza si chiama «R di Gelman-Rubin» (il simbolo R̂ si
+    vedeva con il cappello spostato).
+
+Novità della 1.6:
+  - scheda «Centro»: il vicino infrarosso arriva direttamente da IRSA (immagini Atlas 2MASS
+    nelle bande J, H e Ks, unite a mosaico e mostrate a colori: Ks rosso, H verde, J blu),
+    perché SkyView per 2MASS e WISE attorno al centro galattico rispondeva sempre con un
+    errore. Prima volta: circa 10-20 MB da scaricare, poi dalla cache (~/.cache/buco_nero).
+    Se IRSA non risponde si torna a provare SkyView;
+  - MCMC: tendina con la lunghezza (40 000, 100 000 o 200 000 passi) e controllo della
+    convergenza R̂ (Gelman-Rubin sulla catena divisa in 4 pezzi; 1 = perfetta, sotto 1,05
+    accettabile). Con S38 gli angoli Ω e ω possono non convergere (orbita vista quasi di
+    faccia): la finestra lo dice, e non cambia massa e distanza;
+  - verifica relativistica: dopo ogni calcolo l'orbita di ogni stella viene integrata con le
+    equazioni post-newtoniane (1PN) vere e confrontata con la precessione approssimata del
+    programma. Con S2 la differenza massima è 0,12 mas e 7,5 km/s, contro errori delle misure
+    di 0,57 mas e 45 km/s: l'approssimazione basta. L'effetto intero della relatività fino al
+    2016 vale solo 0,4 mas: per questo f_SP non si può ancora misurare con questi dati;
+  - nella scheda PDF a più stelle ci sono ora anche f_SP, MCMC e le verifiche.
+
+Novità della 1.5:
+  - MCMC: la lunghezza del passo segue l'accettazione degli ultimi 500 passi (prima quella
+    dall'inizio: con 3 stelle restava al 5 %, ora ~22 %); riscaldamento = primo 40 %;
+  - grafico MCMC senza scritte sovrapposte (titolo su tre righe, impaginazione automatica);
+  - in tutti i grafici della finestra la figura resta almeno 7 × 4,5 pollici (al 200 %);
+  - colonna di sinistra un po' più stretta (34 caratteri);
+  - grafici con più stelle (orbite, velocità, massa, residui): titoli corti e legenda fuori a
+    destra, una voce per stella; scritta del centro galattico su due righe.
+
+Novità della 1.4 (correzioni della 1.3, con il testo di nuovo grande):
+  - nomi delle schede più corti e linguette con carattere un po' più piccolo (non più tagliate);
+  - colonna di sinistra misurata dopo aver applicato il carattere (pulsanti non più tagliati);
+  - grafici disegnati con la misura della scheda visibile (il grafico dell'MCMC usciva piccolo
+    in un angolo, sopra i resti del messaggio di prima).
+
+Novità della 1.3 (correzioni della 1.2):
+  - testo: base del 100 % fissa a 13 punti (nella 1.2 il 150 % poteva uscire piccolo);
+  - durante l'MCMC «Calcola» è spento; se un MCMC viene scartato la finestra lo dice;
+    il pulsante dice quanto durerà (40 000 passi: ~1 minuto per stella);
+  - fonti dei dati scritte in italiano nella finestra.
+
+Novità della 1.2:
+  - «Incertezze con MCMC»: 40 000 passi (circa 1 minuto con S2, 2-3 con tre stelle),
+    mediana e intervallo del 68 % di massa e distanza, scheda «MCMC» con la nuvola M-R0;
+  - «Precessione relativistica libera»: fattore f_SP (1 = Einstein, 0 = Newton) nel modello;
+    con i dati fino al 2016 non è ancora vincolato (GRAVITY l'ha misurato con il 2018);
+  - scheda «Centro galattico»: 10' attorno a Sgr A* da SkyView in luce visibile e infrarosso;
+  - crea_eseguibile_ubuntu.sh: autotest, compilazione con PyInstaller, autotest, installazione.
+
+Novità della 1.1:
+  - più stelle insieme (spunte delle 17 stelle, pulsante «S2 + S38 + S55»): massa,
+    distanza e sistema di riferimento in comune, 6 elementi dell'orbita per stella;
+    controllo: la massa di ogni stella da sola con la distanza fissata a quella comune;
+  - «Crea animazione delle orbite»: MP4 (con ffmpeg) o GIF animata, 1995-2035;
+  - barra di scorrimento a sinistra solo quando serve; etichetta del pericentro spostata.
+
+Installazione (una volta):
+    bash installa.sh
+Poi dal menu o dalla Scrivania («Il buco nero al centro della Galassia»), oppure:
+    BucoNero
+Prova completa (dati, calcolo, scheda, finestra; si chiude da sola):
+    BucoNero --autotest
+Solo calcolo da terminale, scheda nella cartella indicata:
+    BucoNero --calcola --uscita ~/Scrivania/Astronomia/Buco_nero/prova
+
+Senza installare:  python3 buco_nero.py
+
+File:
+    buco_nero.py    finestra (italiano)
+    motore_bn.py    dati, modello dell'orbita, adattamento
+    grafici_bn.py   grafici e scheda (inglese)
+    dati/           copie delle tabelle VizieR (usate se la rete non c'è)
+    buco_nero.png   icona;  icona.py la ridisegna
+
+I dati si scaricano dallo specchio VizieR di Harvard (con tempo massimo di 60 s) e
+restano in ~/.cache/buco_nero; «Riscarica i dati» li prende di nuovo.
+La scheda (PDF + PNG + CSV + JSON) va in ~/Scrivania/Astronomia/Buco_nero/<stella>_<data>.
+
+(c) 2026 Edoardo Battistel
